@@ -1,23 +1,36 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import React from "react";
+import Boton from "./componentes/boton.js";
+import KermitLogo from "./imagenes/kermit-logo.png";
+import Contador from "./componentes/contador";
+import { useState } from "react";
 
 function App() {
+  const [numClics, setNumClics] = useState(0)
+
+  const manejarClic = () => {
+    setNumClics(numClics + 1)
+  };
+  const reiniciarContador = () => {
+    setNumClics(0)
+  };
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div className="kermit-logo-contenedor">
+        <img className="kermit-logo" src={KermitLogo} alt="Logo de kermit" />
+      </div>
+      <div className="contenedor-principal">
+        <Contador numClics={numClics} />
+        <Boton 
+          texto="Aumentar" 
+          esBotonClic={true} 
+          manejarClic={manejarClic} />
+        <Boton
+          texto="Reiniciar"
+          esBotonClic={false}
+          manejarClic={reiniciarContador}
+        />
+      </div>
     </div>
   );
 }
